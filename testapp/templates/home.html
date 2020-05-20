@@ -1,0 +1,17 @@
+{% extends 'base.html' %}
+
+{% block content %}
+{% load static %}
+<img style="width:300px; max-width:300px; height:auto;" src= {% static 'img/rat.jpg' %} alt="rat"/>
+<p>확장 !</p>
+
+ <!-- views.py 넘어온 데이터를 보여주기 -->
+ {% for blog in blogs.all %}
+    <div class="container">
+        <h1>{{ blog.title }}</h1>
+        <p>{{ blog.pub_date }}</p>
+        <p>{{ blog.body }}</p>
+    </div>
+{% endfor %}
+
+{% endblock %}
