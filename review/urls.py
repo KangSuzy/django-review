@@ -21,7 +21,13 @@ urlpatterns = [
     path('admin/', admin.site.urls),
     path('', testapp.views.home, name="home"),
     path('blog/<int:blog_id>', testapp.views.detail, name="detail"),
+    path('new/',testapp.views.new,name="new"),
+    path('create/',testapp.views.create,name="create"),
 ]
 
 # <type:name> 여러객체를 다루는 계층적 url 필요시 사용
 # path-converter
+
+# path의 create.html 로드하는 것이 아니라 
+# views.py의 create 함수를 호출하라는 의미 !
+# path 와 html 갯구가 비례하지 않는다 !
