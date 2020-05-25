@@ -20,4 +20,8 @@ import testapp.views
 urlpatterns = [
     path('admin/', admin.site.urls),
     path('', testapp.views.home, name="home"),
-]   
+    path('blog/<int:blog_id>', testapp.views.detail, name="detail"),
+]
+
+# <type:name> 여러객체를 다루는 계층적 url 필요시 사용
+# path-converter

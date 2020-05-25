@@ -11,6 +11,11 @@ class Blog(models.Model):
         return self.title
     # admin page title 표시
 
+    def summary(self):
+        return self.body[:100]
+    # class body 100글자만 출력
+
+
 # model 작성 후 migration
 # $python manage.py makemigrations migration 만들기
 # $python manage.py migrate 데이터베이스 적용하기
