@@ -23,12 +23,12 @@ from django.conf.urls.static import static
 
 urlpatterns = [
     path('admin/', admin.site.urls),
-    path('', testapp.views.home, name="home"),
-    path('blog/<int:blog_id>', testapp.views.detail, name="detail"),
-    path('new/',testapp.views.new,name="new"),
-    path('create/',testapp.views.create,name="create"),
+    path('', testapp.views.home, name='home'),
 
-    path('portfolio/', portfolio.views.portfolio, name="portfolio")
+    path('testapp/', include('testapp.urls')),
+
+    path('portfolio/', portfolio.views.portfolio, name='portfolio'),
+
 ]+ static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)
 
 # <type:name> 여러객체를 다루는 계층적 url 필요시 사용
