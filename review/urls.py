@@ -18,6 +18,9 @@ from django.urls import path, include
 import testapp.views
 import portfolio.views
 
+from django.conf import settings
+from django.conf.urls.static import static
+
 urlpatterns = [
     path('admin/', admin.site.urls),
     path('', testapp.views.home, name="home"),
@@ -26,7 +29,7 @@ urlpatterns = [
     path('create/',testapp.views.create,name="create"),
 
     path('portfolio/', portfolio.views.portfolio, name="portfolio")
-]
+]+ static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)
 
 # <type:name> 여러객체를 다루는 계층적 url 필요시 사용
 # path-converter

@@ -130,3 +130,6 @@ STATIC_ROOT = os.path.join(BASE_DIR, 'static')
 # STATIC_DIRS static 파일들의 경로
 # STATIC_ROOT 흩어져있는 static 파일을 모아줄 위치 !
 # python manage.py collectstatic static 파일 모으기
+
+MEDIA_ROOT = os.path.join(BASE_DIR, 'media')
+MEDIA_URL = '/media/'
