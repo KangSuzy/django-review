@@ -38,6 +38,7 @@ INSTALLED_APPS = [
     'django.contrib.messages',
     'django.contrib.staticfiles',
     'testapp.apps.TestappConfig',
+    'portfolio.apps.PortfolioConfig',
 ]
 
 MIDDLEWARE = [
@@ -120,7 +121,12 @@ USE_TZ = True
 
 STATIC_URL = '/static/'
 
-STATICFILES_DIRS = (
-    os.path.join(BASE_DIR, 'static'),
-)
-STATIC_ROOT = os.path.join(BASE_DIR, 'staticfiles')
+STATICFILES_DIRS = [
+    os.path.join(BASE_DIR, 'portfolio', 'static')
+]
+
+STATIC_ROOT = os.path.join(BASE_DIR, 'static')
+
+# STATIC_DIRS static 파일들의 경로
+# STATIC_ROOT 흩어져있는 static 파일을 모아줄 위치 !
+# python manage.py collectstatic static 파일 모으기

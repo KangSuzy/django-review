@@ -16,6 +16,7 @@ Including another URLconf
 from django.contrib import admin
 from django.urls import path, include
 import testapp.views
+import portfolio.views
 
 urlpatterns = [
     path('admin/', admin.site.urls),
@@ -23,6 +24,8 @@ urlpatterns = [
     path('blog/<int:blog_id>', testapp.views.detail, name="detail"),
     path('new/',testapp.views.new,name="new"),
     path('create/',testapp.views.create,name="create"),
+
+    path('portfolio/', portfolio.views.portfolio, name="portfolio")
 ]
 
 # <type:name> 여러객체를 다루는 계층적 url 필요시 사용
