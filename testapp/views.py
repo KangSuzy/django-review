@@ -3,6 +3,7 @@ from django.utils import timezone
 from django.core.paginator import Paginator
 
 from .models import Blog
+from .form import BlogPost
 # Create your views here.
 def home(request):
     blogs = Blog.objects
@@ -34,4 +35,17 @@ def create(request):
     blog.body = request.GET['body']
     blog.pub_date = timezone.datetime.now()
     blog.save()
-    return redirect('/blog/'+str(blog.id)) # render와 달리 요청받은 url로 넘김
+    return redirect('/blog/'+str(blog.id)) 
+    # render와 달리 요청받은 url로 넘김
+
+def blogpost(request):
+    if request.method =='POST':
+        form = BlogPost(request.POST)
+        if form.is_valid():
+            post = form.save(commit=False)
+            post.pub_date=timezone.now()
+            post.save()
+            return redirect('home')
+    else:
+        form = BlogPost()
+        return render(request,'new.html',{'form':form})
