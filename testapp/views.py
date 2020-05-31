@@ -4,6 +4,7 @@ from django.core.paginator import Paginator
 
 from .models import Blog
 from .form import BlogPost
+
 # Create your views here.
 def home(request):
     blogs = Blog.objects
