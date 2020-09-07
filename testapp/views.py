@@ -2,8 +2,8 @@ from django.shortcuts import render,get_object_or_404, redirect
 from django.utils import timezone
 from django.core.paginator import Paginator
 
-from .models import Blog
-from .form import BlogPost
+from .models import Blog, Comment
+from .form import BlogPost,CommentForm
 
 # Create your views here.
 def home(request):
@@ -23,7 +23,14 @@ def home(request):
 
 def detail(request, blog_id):
     blog_detail = get_object_or_404(Blog, pk=blog_id)
-    return render(request, 'detail.html', {'blog':blog_detail})
+    if request.method == 'POST':
+         comment_form = CommentForm(request.POST)
+         comment_form.instance.blog_id = pk
+         if comment_form.is_valid():
+             comment = comment_form.save()
+    comment_form = CommentForm()
+    comments = blog_detail.comments.all()
+    return render(request, 'detail.html', {'blog':blog_detail, 'comments':comments, 'comment_form': comment_form})
 
 # pk 모델의 많은 객체들을 구분하는 구분자
  
@@ -52,3 +59,26 @@ def blogpost(request):
     else:
         form = BlogPost()
         return render(request,'new.html',{'form':form})
+
+def comment_update(request, pk):
+    comment = get_object_or_404(Comment, pk=pk)
+    blog = get_object_or_404(Blog, pk= comment.blog.id)
+
+    if request.method == 'POST':
+        form = CommentForm(request.POST, instance=comment)
+        if form.is_valid():
+            form.save()
+            return redirect('/blog/'+str(blog.id))
+    else:
+        form = CommentForm(instance = comment)
+    return render(request, 'blog/comment_update.html', {'form':form})
+
+def comment_delete(request, pk):
+    comment = get_object_or_404(Comment, pk=pk)
+    blog = get_object_or_404(Blog, pk= comment.blog.id)
+    if request.method == 'POST':
+        comment.delete()
+        return redirect('/blog/'+str(blog.id))
+    else:
+        form = CommentForm(instance = comment)
+    return render(request, 'blog/comment_delete.html', {'object':comment})

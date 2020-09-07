@@ -14,7 +14,23 @@
         <a href="{% url 'home' %}">돌아가기</a>
     </div>
 
+<hr/>
+<h3>댓글창</h3>
+{% for comment in blog.comments.all %}
+<div class="detail">
+<strong>{{comment.body}}</strong>
 
+<div class="bin">
+<a href = "{% url 'comment_update' comment.pk %}">수정</a>
+<a href = "{% url 'comment_delete' comment.pk %}">삭제</a>
+</div>
+
+</div>
+<hr/>
+{% empty %}
+<p> 댓글이 없습니다 </p>
+{% endfor %}
+</body>
+</HTML>
 
 {% endblock %}
-</HTML>

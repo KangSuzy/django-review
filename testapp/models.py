@@ -21,3 +21,11 @@ class Blog(models.Model):
 # $python manage.py migrate 데이터베이스 적용하기
 
 # model 속성 > admin 양식 결정
+
+class Comment(models.Model):
+    blog = models.ForeignKey(Blog, on_delete = models.CASCADE, related_name='comments')
+    date = models.DateField(auto_now_add=True)
+    body = models.TextField()
+
+    def __str__(self):
+        return self.body
