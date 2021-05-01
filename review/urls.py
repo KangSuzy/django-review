@@ -17,10 +17,12 @@ from django.contrib import admin
 from django.urls import path, include
 from django.conf import settings
 from django.conf.urls.static import static
+from django.conf.urls import url
 
 import testapp.views
 import portfolio.views
 import accounts.views
+import employee.views
 
 urlpatterns = [
     path('admin/', admin.site.urls),
@@ -31,6 +33,8 @@ urlpatterns = [
     path('accounts/', include('accounts.urls')),
 
     path('portfolio/', portfolio.views.portfolio, name='portfolio'),
+    
+    path('employee/', include('employee.urls')),
 
 ]+ static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)
 

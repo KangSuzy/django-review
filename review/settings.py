@@ -41,6 +41,9 @@ INSTALLED_APPS = [
     'testapp.apps.TestappConfig',
     'portfolio.apps.PortfolioConfig',
     'accounts.apps.AccountsConfig',
+    'snippets.apps.SnippetsConfig',
+    'rest_framework',
+    'employee',
 ]
 
 MIDDLEWARE = [
